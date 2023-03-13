@@ -1,5 +1,4 @@
 viberbot
-flask
 requests
-gunicorn
 fastapi
+uvicorn[standard]
