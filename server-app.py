@@ -12,7 +12,7 @@ from viberbot.api.viber_requests import ViberFailedRequest
 from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 
-context = ('/etc/letsencrypt/live/pharmaproof.com/cert.pem', '/etc/letsencrypt/live/pharmaproof.com/privkey.pem')
+# context = ('/etc/letsencrypt/live/pharmaproof.com/cert.pem', '/etc/letsencrypt/live/pharmaproof.com/privkey.pem')
 
 app = Flask(__name__)
 
@@ -57,6 +57,7 @@ if __name__ == "__main__":
     scheduler.enter(5, 1, set_webhook, (viber,))
     t = threading.Thread(target=scheduler.run)
     t.start()
-    app.run(host="0.0.0.0", port=443, debug=True, ssl_context=context)
+    # app.run(host="0.0.0.0", port=443, debug=True, ssl_context=context)
+    app.run(host="0.0.0.0", port=443, debug=True)
     # app.run(host='134.209.247.209', debug=True, ssl_context=context)
     # app.run(host='https://pharmaproof.com', port=443, debug=True, ssl_context=context)
