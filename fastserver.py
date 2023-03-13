@@ -11,6 +11,9 @@ from viberbot.api.viber_requests import ViberFailedRequest
 from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
+
 app = FastAPI()
 
 origins = ['*']
@@ -32,10 +35,13 @@ viber = Api(BotConfiguration(
 
 @app.post("/")
 async def incoming(request: Request):
-    if not viber.verify_signature(request.json(), request.headers.get('X-Viber-Content-Signature')):
-        return Response(status_code=403)
-    else:
-        return Response(status_code=200, content={"message": request.json()})
+    body = await request.body()
+    logging.info(f"received request. post data: {body}")
+    return Response(status_code=200)
+    # if not viber.verify_signature(request.json(), request.headers.get('X-Viber-Content-Signature')):
+    #     return Response(status_code=403)
+    # else:
+    #     return Response(status_code=200, content={"message": request.json()})
 
 
 @app.get("/status")
