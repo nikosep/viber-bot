@@ -53,10 +53,10 @@ def set_webhook(viber):
 
 
 if __name__ == "__main__":
-    scheduler = sched.scheduler(time.time, time.sleep)
-    scheduler.enter(5, 1, set_webhook, (viber,))
-    t = threading.Thread(target=scheduler.run)
-    t.start()
+    # scheduler = sched.scheduler(time.time, time.sleep)
+    # scheduler.enter(5, 1, set_webhook, (viber,))
+    # t = threading.Thread(target=scheduler.run)
+    # t.start()
     # app.run(host="0.0.0.0", port=443, debug=True, ssl_context=context)
     app.run(host="0.0.0.0", port=443, debug=True)
     # app.run(host='134.209.247.209', debug=True, ssl_context=context)
