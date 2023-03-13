@@ -2,6 +2,8 @@ import uvicorn
 from fastapi import FastAPI, Request, Response
 import logging
 import os
+
+from starlette.middleware.cors import CORSMiddleware
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages.text_message import TextMessage
@@ -10,6 +12,15 @@ from viberbot.api.viber_requests import ViberMessageRequest
 from viberbot.api.viber_requests import ViberSubscribedRequest
 
 app = FastAPI()
+
+origins = ['*']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 viber = Api(BotConfiguration(
     name='hotilitieschat',

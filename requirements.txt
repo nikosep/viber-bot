@@ -2,3 +2,4 @@ viberbot
 requests
 fastapi
 uvicorn[standard]
+starlette
