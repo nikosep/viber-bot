@@ -58,6 +58,6 @@ if __name__ == "__main__":
     # t = threading.Thread(target=scheduler.run)
     # t.start()
     # app.run(host="0.0.0.0", port=443, debug=True, ssl_context=context)
-    app.run(host="0.0.0.0", port=443)
+    app.run(host="0.0.0.0",)
     # app.run(host='134.209.247.209', debug=True, ssl_context=context)
     # app.run(host='https://pharmaproof.com', port=443, debug=True, ssl_context=context)
