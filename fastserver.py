@@ -38,7 +38,7 @@ async def incoming(request: Request):
     logging.info(f"received request. post data: {body}")
     viber_request = viber.parse_request(body)
     message = viber_request.message
-    viber.send_messages(viber_request.sender.id, [message])
+    viber.send_messages(viber_request.sender.id, [f"Hello {viber_request.sender.id}, {message} :P"])
     return Response(status_code=200)
     # if not viber.verify_signature(request.json(), request.headers.get('X-Viber-Content-Signature')):
     #     return Response(status_code=403)
