@@ -35,10 +35,13 @@ viber = Api(BotConfiguration(
 @app.post("/")
 async def incoming(request: Request):
     body = await request.body()
-    logging.info(f"received request. post data: {body}")
     viber_request = viber.parse_request(body)
     message = viber_request.message
-    viber.send_messages(viber_request.sender.id, [f"Hello {viber_request.sender.id}, {message} :P"])
+    viber.send_messages(viber_request.sender.id, [message])
+    try:
+        logging.info(f"received request. post data: {body} from {viber_request.sender}")
+    except:
+        pass
     return Response(status_code=200)
     # if not viber.verify_signature(request.json(), request.headers.get('X-Viber-Content-Signature')):
     #     return Response(status_code=403)
