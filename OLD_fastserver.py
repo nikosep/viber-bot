@@ -1,5 +1,6 @@
 import uvicorn
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, Path
+from typing import Annotated, Union
 import logging
 import os
 from starlette.middleware.cors import CORSMiddleware
@@ -24,7 +25,7 @@ SAMPLE_RICH_MEDIA = {
     "ButtonsGroupRows": 7,
     "Buttons": [
         {
-            "ActionBody": "https://www.google.com",
+            "ActionBody": "",
             "Columns": 6,
             "Rows": 3,
             "ActionType": "open-url",
@@ -49,7 +50,7 @@ SAMPLE_RICH_MEDIA = {
             "TextSize": "large",
             "TextVAlign": "middle",
             "TextHAlign": "middle",
-            "Image": "https://www.liveleanrxhouston.com/wp-content/uploads/2019/11/Buy-Now-V2.jpg",
+            "Image": "https://www.pngall.com/wp-content/uploads/4/Learn-More-Button-Transparent.png",
             "InternalBrowser.ActionButton": "none"
         }
     ]
@@ -73,11 +74,14 @@ viber = Api(BotConfiguration(
     name=os.getenv('VIBER_BOT_NAME'),
     avatar='',
     auth_token=os.getenv('VIBER_TOKEN')
+    # auth_token="50fc7b6174a7e27f-f464159b9676ac93-77327d466a9a64e8"
 ))
 
 
-@app.post("/")
-async def incoming(request: Request):
+# myViber-ID = SGM0oGJysLKubsvVQkYOCQ==
+@app.post("/{app_id}")
+async def incoming(app_id: str, request: Request):
+    nikos = app_id
     body = await request.body()
     viber_request = viber.parse_request(body)
     if not viber.verify_signature(body, request.headers.get('X-Viber-Content-Signature')):
